@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AccesoDatos.Models;
+﻿namespace AccesoDatos.Models;
 
 public partial class Alumno
 {

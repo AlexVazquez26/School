@@ -1,8 +1,8 @@
-﻿using AccesoDatos;
-using AccesoDatos.Models;
+﻿using AccesoDatos.Operations;
 
 namespace ConsoleApp
 {
+    //programa guia para poder probar las operaciones CRUD para futuras consultas
     internal class Program
     {
         public static AlumnoDAO opAlumno = new AlumnoDAO();
@@ -10,7 +10,8 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             GiveNames();
-
+            joineado();
+            
         }
 
         public static void GiveNames()
@@ -34,15 +35,34 @@ namespace ConsoleApp
             //opAlumno.InsertAlumno("48456T", "Alejandro Vazquez", "Sendas residencial", 25, "avla@gmail.com"); //Insert new value
 
 
-            opAlumno.UpdateAlumno(11, "48456T", "Mario Casa", "Sendas residencial", 25, "avla@gmail.com");
+            //opAlumno.UpdateAlumno(11, "48456T", "Mario Casa", "Sendas residencial", 25, "avla@gmail.com");
 
-            foreach (var alumno in opAlumno.SelectAll())
-            {
-                Console.WriteLine($"El nombre es: {alumno.Nombre}");
-            }
+            //foreach (var alumno in opAlumno.SelectAll())
+            //{
+            //    Console.WriteLine($"El nombre es: {alumno.Nombre}");
+            //}
 
-            Console.WriteLine("Showing new tables");
+            //
+
+            //opAlumno.DeleteAlumno(11);
+            //Console.WriteLine("Delete Values.");
+            //Console.WriteLine("Showing new tables");
+            //foreach (var alumno in opAlumno.SelectAll())
+            //{
+            //    Console.WriteLine($"El nombre es: {alumno.Nombre}");
+            //}
+
         }
+
+        public static void joineado()
+        {
+            Console.WriteLine(new string('-', 50));
+            foreach (var alumnosAsignatura in opAlumno.SelectAlumnosAsignaturasList())
+            {
+                Console.WriteLine(alumnosAsignatura.NombreAlumno + "--->" +alumnosAsignatura.NombreAsignatura);
+            }
+        }
+
 
 
     }

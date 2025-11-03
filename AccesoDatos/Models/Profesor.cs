@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AccesoDatos.Models;
+﻿namespace AccesoDatos.Models;
 
 public class Profesor
 {
@@ -9,9 +6,8 @@ public class Profesor
 
     public string Pass { get; set; } = null!;
 
-    public string Nombre { get; set; } = null!;
-
-    public string Email { get; set; } = null!;
+    public string? Nombre { get; set; } = null !;
+    public string? Email { get; set; } = null!;
 
     public virtual ICollection<Asignatura> Asignaturas { get; set; } = new List<Asignatura>();
 }
