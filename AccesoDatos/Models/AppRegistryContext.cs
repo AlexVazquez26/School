@@ -9,38 +9,24 @@ public partial class AppRegistryContext : DbContext
     public AppRegistryContext()
     {
     }
-
     public AppRegistryContext(DbContextOptions<AppRegistryContext> options)
         : base(options)
     {
     }
-
     public virtual DbSet<Alumno> Alumnos { get; set; }
-
     public virtual DbSet<Application> Applications { get; set; }
-
     public virtual DbSet<ApplicationType> ApplicationTypes { get; set; }
-
     public virtual DbSet<ArchType> ArchTypes { get; set; }
-
     public virtual DbSet<Asignatura> Asignaturas { get; set; }
-
     public virtual DbSet<BusinessOwner> BusinessOwners { get; set; }
-
     public virtual DbSet<Calificacion> Calificacions { get; set; }
-
     public virtual DbSet<Department> Departments { get; set; }
-
     public virtual DbSet<LifeCycleStage> LifeCycleStages { get; set; }
-
     public virtual DbSet<Matricula> Matriculas { get; set; }
-
     public virtual DbSet<Profesor> Profesors { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=WATSQLDEV15; Encrypt=False; DataBase=AppRegistry;Integrated Security=true");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Alumno>(entity =>
@@ -68,7 +54,6 @@ public partial class AppRegistryContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("nombre");
         });
-
         modelBuilder.Entity<Application>(entity =>
         {
             entity.HasKey(e => e.AppId).HasName("PK__Applicat__6F8A0A341F43099E");

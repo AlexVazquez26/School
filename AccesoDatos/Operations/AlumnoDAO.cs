@@ -141,10 +141,10 @@ namespace AccesoDatos.Operations
             return appContext.Alumnos.FirstOrDefault(a => a.Id == id)!;
         }
 
-        public Alumno SelectByDni(string dni)
+        public Alumno? SelectByDni(string dni)
         {
             using var appContext = new AppRegistryContext();
-            return appContext.Alumnos.FirstOrDefault(a => a.Dni == dni)!;
+            return appContext.Alumnos.FirstOrDefault(a => a.Dni == dni);
         }
 
         public bool AddAndMatriculate(string dni, string nombre, string direccion, int edad, string email, int id_asig)
@@ -152,7 +152,7 @@ namespace AccesoDatos.Operations
             try
             {
                 var exist = SelectByDni(dni);
-                if (exist ==null) //Sinigica que no existe
+                if (exist == null) //Sinigica que no existe
                 {
                     InsertAlumno(dni, nombre, direccion, edad, email);
                     var inserted = SelectByDni(dni);
@@ -185,6 +185,30 @@ namespace AccesoDatos.Operations
             }
         }
 
+        public bool DeleteAlumnoDAO(int id)
+        {
+            try
+            {
+                using var appContext = new AppRegistryContext();
+                var alumno = appContext.Alumnos.FirstOrDefault(a => a.Id == id)!;
+                if (alumno == null)
+                    return false;
+                var matriculas = appContext.Matriculas.Where(m => m.AlumnoId == id);
+                foreach (Matricula m in matriculas)
+                {
+                    var calificaciones = appContext.Calificacions.Where(c =>c.MatriculaId == m.Id);
+                    appContext.Calificacions.RemoveRange(calificaciones);
+                }
+                appContext.Matriculas.RemoveRange(matriculas);
+                appContext.Alumnos.Remove(alumno);
+                appContext.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
 
+                return false;
+            }
+        }
     }
 }

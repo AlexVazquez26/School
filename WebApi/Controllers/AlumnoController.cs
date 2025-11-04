@@ -17,7 +17,7 @@ namespace WebApi.Controllers
 
         [HttpGet("alumnosProfesor")]
         public List<AlumnoProfesor> AlumnosProfesor(string usuario) => alumnoDAO.JoinAlumnoProfesors(usuario);
-
+        
         [HttpPut("alumno")]
         //datos viajan por el body no es viable hacerlo atraves de la URL podria ser muy largo o inseguro 
         public IActionResult UpdateAlumno([FromBody] Alumno alumno)
@@ -36,5 +36,7 @@ namespace WebApi.Controllers
         public bool InsertNewGest([FromBody] Alumno alumno, int id_asig) => alumnoDAO.AddAndMatriculate(alumno.Dni,
             alumno.Nombre, alumno.Direccion, alumno.Edad, alumno.Email, id_asig);
 
+        [HttpDelete("alumno")]
+        public bool DeleteAlumno(int id) => alumnoDAO.DeleteAlumno(id);
     }
 }
